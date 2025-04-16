@@ -28,10 +28,12 @@ plot(tree, cex = 0.6)
 2 PRE-MODELLING ANALYSIS
 
 2.1 Spatial Auto-correlation 
+
 Mantel Correlogram 
 ```ecospat.mantel.correlogram(dfvar = ecospat.testData[c(2:16)], colxy = 1:2, n = 100, colvar = 3:7, max = 1000, nclass = 10, nperm = 100)
 ```
 2.2 Predictor Variable Selection
+
 Number of predictors with Pearson Correlation 
 ```colvar <- ecospat.testData[c(4:8)]
 x <- cor(colvar, method = "pearson")
@@ -108,6 +110,7 @@ t.dyn <- ecospat.niche.dyn.index(grid.clim.t.nat, grid.clim.t.inv)
 ecospat.plot.niche.dyn(grid.clim.t.nat, grid.clim.t.inv, quant=0, interest=2, title = "Niche Overlap", name.axis1 = "Average temperature") #Plot the niche dynamics along one gradient (T)
 ```
 2.6 Biotic Interactions
+
 Species co-occurrence analysis with a presence-absence matrix
 ```data <- ecospat.testData[c(9:16, 54:57)]
 ecospat.co_occurrences(data)
@@ -119,6 +122,7 @@ outpath <- getwd()
 ecospat.Cscore(data, nperm, outpath)
 ```
 2.7 Data Preparation 
+
 Correlation plot of variables 
 ```data <- ecospat.testData[,4:8]
 ecospat.cor.plot(data)
