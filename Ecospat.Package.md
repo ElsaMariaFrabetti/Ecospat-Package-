@@ -28,6 +28,7 @@ tree <- ape::read.tree(fpath)
 tree$tip.label
 plot(tree, cex = 0.6)
 ```
+![Rplot1](https://github.com/user-attachments/assets/a004c030-7b66-4be0-b16c-85f3077d857f)
 
 2 PRE-MODELLING ANALYSIS
 
