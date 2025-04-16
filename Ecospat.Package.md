@@ -27,11 +27,11 @@ plot(tree, cex = 0.6)
 
 2 PRE-MODELLING ANALYSIS
 
-2.1 Spatial Auto-correlation: 
+2.1 Spatial Auto-correlation 
 Mantel Correlogram
 ```ecospat.mantel.correlogram(dfvar = ecospat.testData[c(2:16)], colxy = 1:2, n = 100, colvar = 3:7, max = 1000, nclass = 10, nperm = 100)
 ```
-2.2 Predictor Variable Selection:
+2.2 Predictor Variable Selection
 Number of predictors with Pearson Correlation 
 ```colvar <- ecospat.testData[c(4:8)]
 x <- cor(colvar, method = "pearson")
