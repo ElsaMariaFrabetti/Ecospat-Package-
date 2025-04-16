@@ -2,25 +2,25 @@
 
 LOAD DATA
 
-''' install.packages("ecospat", dependencies = TRUE)
+```install.packages("ecospat", dependencies = TRUE)
 library(ecospat)
 citation("ecospat")
-'''
+```
 Test data for ecospat library
-'''data("ecospat.testData")
+```data("ecospat.testData")
 names(ecospat.testData)
-'''
+```
 Test data for Niche Overlap Analysis
-'''data("ecospat.testNiche.inv")
+```data("ecospat.testNiche.inv")
 names(ecospat.testNiche.inv)
 data("ecospat.testNiche.nat")
 names(ecospat.testNiche.nat)
-'''
+```
 Test tree for Phylogenetic Diversity Analysis
-'''install.packages("ape")
+```install.packages("ape")
 if(requireNamespace("ape"))
 fpath <- system.file("extdata", "ecospat.testTree.tre", package = "ecospat")
 tree <- ape::read.tree(fpath)
 tree$tip.label
 plot(tree, cex = 0.6)
-'''
+```
