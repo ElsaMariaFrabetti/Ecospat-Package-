@@ -1,6 +1,6 @@
 # Ecospat Package for species distribution modelling
 
-1 LOAD DATA
+# 1 LOAD DATA
 
 ```
 install.packages("ecospat", dependencies = TRUE)
@@ -31,7 +31,7 @@ plot(tree, cex = 0.6)
 ![Rplot1](https://github.com/user-attachments/assets/1c19b08c-d21a-457f-b00b-d13e767742dc)
 
 
-2 PRE-MODELLING ANALYSIS
+# 2 PRE-MODELLING ANALYSIS
 
 2.1 Spatial Auto-correlation 
 
@@ -193,7 +193,7 @@ data <- ecospat.testData
 caleval <- ecospat.caleval(data = ecospat.testData[53], xy=data[2:3], row.num = 1:nrow(data), nrep = 2, ratio = 0.7, disaggregate = 0.2, pseudoabs = 100, npres = 10, replace = FALSE)
 head(caleval) #Obtaining an evaluation and calibration dataset with a desired ratio of disaggregation
 ```
-3 CORE NICHE MODELLING
+# 3 CORE NICHE MODELLING
 
 3.1 Model Evaluation
 
@@ -255,7 +255,7 @@ sr <- as.data.frame(rowSums(proba))
 prr <- ecospat.SESAM.prr(proba, sr)
 head(prr)[,1:4]
 ```
-4 POST-MODELLING
+# 4 POST-MODELLING
 
 4.1 Spatial Predictions of Species Assemblages
 ```
@@ -267,7 +267,7 @@ ecospat.cons_Cscore(presence, pred, nbpermut, outpath)
 ```
 ![Rplot4 1](https://github.com/user-attachments/assets/9f3bca06-428c-4bfc-8381-e2e528bdb6fa)
 
-#END#
+
 
 
 
