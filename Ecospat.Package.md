@@ -195,6 +195,80 @@ head(caleval) #Obtaining an evaluation and calibration dataset with a desired ra
 ```
 3 CORE NICHE MODELLING
 
+3.1 Model Evaluation
+
+Presence-only evaluation indices - Boyce Index
+```
+fit <- ecospat.testData$glm_Saxifraga_oppositifolia
+obs <- ecospat.testData$glm_Saxifraga_oppositifolia[which(ecospat.testData$Saxifraga_oppositifolia==1)]
+ecospat.boyce(fit, obs, nclass = 0, window.w = "default", res = 100, PEplot = TRUE)$cor
+```
+![Rplot3 1](https://github.com/user-attachments/assets/4003da90-41da-4b2a-960b-d3f84c504407)
+
+Accuracy of community prediction
+```
+eval <- ecospat.testData[c(53,62,58,70,61,66,65,71,69,43,63,56,68,57,55,60,54,67,59,64)]
+pred <- ecospat.testData[c(73:92)]
+CommunityEval <- ecospat.CommunityEval(eval, pred, proba = TRUE, ntir = 5, verbose = T)
+```
+3.2 Spatial Predictions and Projections
+
+ESM - Ensemble of Small Models
+```
+install.packages("biomod2", dependencies = TRUE) #dependencies added because not automatically installed
+library(biomod2) 
+xy <- inv[,1:2] #species occurrences
+head(xy)
+sp_occ <- inv[11]
+current <- inv[3:7] #environment
+head(current)
+```
+BIOMOD
+```
+t1 <- Sys.time()
+sp <- 1
+myBiomodData <- biomod2::BIOMOD_FormatingData(resp.var=as.numeric(sp_occ[,sp]), expl.var=current, resp.xy=xy, resp.name=colnames(sp_occ)[sp]) 
+```
+Calibration of simple bivariate models
+```
+my.ESM <- ecospat.ESM.Modeling(data = myBiomodData, models = c("GLM"), NbRunEval = 2, DataSplit = 70, weighting.score = c("AUC"), parallel=F)
+```
+Evaluation and average of simple bivariate models to ESMs
+```
+my.ESM_EF <- ecospat.ESM.EnsembleModeling(my.ESM, weighting.score = c("SomersD"),threshold = 0)
+```
+Projection of simple bivariate models into new space
+```
+my.ESM_proj_current <- ecospat.ESM.Projection(ESM.modeling.output = my.ESM, new.env = current)
+```
+Projection of calibrated ESMs into new space
+```
+my.ESM_EFproj_current <- ecospat.ESM.EnsembleProjection(ESM.prediction.output = my.ESM_proj_current, ESM.EnsembleModeling.output = my.ESM_EF)
+```
+3.3 Spatial Prediction of Communities 
+```
+proba <- ecospat.testData[,73:92]
+sr <- as.data.frame(rowSums(proba))
+```
+3.4 SESAM Framework 
+```
+prr <- ecospat.SESAM.prr(proba, sr)
+head(prr)[,1:4]
+```
+4 POST-MODELLING
+
+4.1 Spatial Predictions of Species Assemblages
+```
+presence <- ecospat.testData[c(53,62,58,70,61,66,65,71,69,43,63,56,68,57,55,60,54,67,59,64)]
+pred <- ecospat.testData[c(73:92)]
+nbpermut <- 100
+outpath <- getwd()
+ecospat.cons_Cscore(presence, pred, nbpermut, outpath)
+```
+![Rplot4 1](https://github.com/user-attachments/assets/9f3bca06-428c-4bfc-8381-e2e528bdb6fa)
+
+#END#
+
 
 
 
